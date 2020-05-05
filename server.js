@@ -18,7 +18,7 @@ app.get('/message', (request, response) => {
 app.post('/message', (request, response) => {
   console.log(request.body)
   console.log(request.query)
-  response.send('Message ' + request.body.text + ' successfully added')
+  response.status(201).send({error: '', body: 'Successfully created' })
 })
 
 // app.use('/', (request, response) => {
