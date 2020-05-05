@@ -8,6 +8,10 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
 
 app.get('/message', (request, response) => {
+  console.log(request.headers)
+  response.header({
+    'custom-header': 'Our custom header'
+  })
   response.send('List of messages')
 })
 
