@@ -20,7 +20,7 @@ router.post("/message", (req, res) => {
   console.log(req.body);
   console.log(req.query);
   req.query.error == "ok"
-    ? response.error(req, res, "Simulated Error: ", 400)
+    ? response.error(req, res, "unexpected error has occurred: ", 500, 'Internal server error')
     : response.success(req, res, "Successfully Created", 201);
 });
 

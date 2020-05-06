@@ -1,3 +1,5 @@
+const chalk = require('chalk')
+
 exports.success = (req, res, message, status) => {
   res.status(status || 200).send({
     error: "",
@@ -5,7 +7,8 @@ exports.success = (req, res, message, status) => {
   })
 }
 
-exports.error = (res, req, message, status) => {
+exports.error = (res, req, message, status, details) => {
+  console.error(chalk.red(details))
   res.status(status || 500).send({
     error: message,
     body: ""
