@@ -1,34 +1,16 @@
-const express = require("express");
 const PORT = 3000;
-const router = express.Router();
+const express = require('express')
 const bodyParser = require("body-parser");
-const response = require("./network/response");
+// const router = require('./components/message/network');
+const router = require('./network/routes')
 
 var app = express();
-app.use(router);
+// app.use(router);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-router.get("/message", (req, res) => {
-  res.header({
-    "custom-header": "Our custom header",
-  });
-  response.success(req, res, "message list");
-});
-
-router.post("/message", (req, res) => {
-  console.log(req.body);
-  console.log(req.query);
-  req.query.error == "ok"
-    ? response.error(req, res, "unexpected error has occurred: ", 500, 'Internal server error')
-    : response.success(req, res, "Successfully Created", 201);
-});
-
-// app.use('/', (request, response) => {
-//   response.send('Hola')
-// })
+router(app)
 
 app.use('/app', express.static("public"))
-
 app.listen(PORT);
 console.log("App is listening on port http://localhost:3000");
