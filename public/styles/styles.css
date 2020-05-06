@@ -1,0 +1,8 @@
+:root {
+  --node-text-color: #43853d;
+}
+
+h1 {
+  color: var(--node-text-color);
+  font-family: Arial, Helvetica, sans-serif;
+}

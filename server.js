@@ -28,5 +28,7 @@ router.post("/message", (req, res) => {
 //   response.send('Hola')
 // })
 
+app.use('/app', express.static("public"))
+
 app.listen(PORT);
 console.log("App is listening on port http://localhost:3000");
