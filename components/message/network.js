@@ -1,6 +1,7 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const response = require('../../network/response')
+const controller = require("./controller");
+const response = require("../../network/response");
 
 router.get("/", (req, res) => {
   res.header({
@@ -10,11 +11,20 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  console.log(req.body);
-  console.log(req.query);
-  req.query.error == "ok"
-    ? response.error(req, res, "unexpected error has occurred: ", 500, 'Internal server error')
-    : response.success(req, res, "Successfully Created", 201);
+  controller
+    .addMessage(req.body.user, req.body.message)
+    .then((FullMessage) => {
+      response.success(req, res, FullMessage, 201);
+    })
+    .catch((error) => {
+      response.error(
+        req,
+        res,
+        "Invalid information: ",
+        400,
+        "Controller Error"
+      );
+    });
 });
 
 module.exports = router;

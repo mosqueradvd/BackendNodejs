@@ -8,7 +8,7 @@ exports.success = (req, res, message, status) => {
 }
 
 exports.error = (res, req, message, status, details) => {
-  console.error(chalk.red(details))
+  console.error(chalk.yellow(details))
   res.status(status || 500).send({
     error: message,
     body: ""
