@@ -10,14 +10,16 @@ db.connect('mongodb+srv://db_user_tlgram:bHp6L9QzceSgYcpn@cluster0-atgr8.mongodb
 console.log('[DB]: Successfully Connected');
 
 function addMessage(message) {
-  // list.push(message);
   const myMessage = new Model(message)
   myMessage.save();
 }
 
-async function getMessages() {
-  // return list;
-    const messages = await Model.find();
+async function getMessages(filterUser) {
+  let filter = {}
+  if(filterUser !== null) {
+    filter = { user: filterUser }
+  }
+    const messages = await Model.find(filter);
     return messages
 }
 
@@ -27,7 +29,7 @@ async function updateText(id, message) {
   })
 
   foundMessage.message = message;
-  
+
   const newMessage = await foundMessage.save();
   return newMessage;
 }
