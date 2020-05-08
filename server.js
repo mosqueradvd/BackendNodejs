@@ -1,11 +1,12 @@
 const PORT = 3000;
 const express = require('express')
 const bodyParser = require("body-parser");
-// const router = require('./components/message/network');
+const db = require('./db')
 const router = require('./network/routes')
 
+db('mongodb+srv://db_user_tlgram:bHp6L9QzceSgYcpn@cluster0-atgr8.mongodb.net/test');
+
 var app = express();
-// app.use(router);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
