@@ -7,8 +7,7 @@ function addMessage(user, message) {
       reject("Not enough data");
       return false
     }
-    console.log(user);
-    console.log(message);
+    console.log(user,message);
     const FullMessage = {
       user: user,
       message: message,
@@ -25,7 +24,20 @@ function getMessages() {
   })
 }
 
+function updateMessage(id, message) {
+  return new Promise(async (resolve, reject) => {
+    if(!id || !message) {
+      reject('Invalid Data')
+      return false;
+    }
+    const result = await store.updateText(id, message);
+
+    resolve(result);
+  })
+}
+
 module.exports = {
   addMessage,
-  getMessages
+  getMessages,
+  updateMessage
 };
