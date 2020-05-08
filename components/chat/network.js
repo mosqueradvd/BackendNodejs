@@ -3,8 +3,8 @@ const router = express.Router();
 const controller = require("./controller");
 const response = require("../../network/response");
 
-router.get('/', (req, res) => {
-  controller.getAllUsers()
+router.get('/:userId', (req, res) => {
+  controller.listChats(req.params.userId)
   .then(user => {
     response.success(req, res, user, 200)
   })
@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  controller.addUser(req.body.name)
+  controller.addChat(req.body.users)
     .then(data => {
       response.success(req, res, data, 201)
     })

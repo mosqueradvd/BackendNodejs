@@ -11,8 +11,15 @@ function addUser(){
   return store.add(user);
 }
 
+function getAllUsers() {
+  return new Promise((resolve, reject) => {
+    resolve(store.list())
+  })
+}
+
 module.exports = {
-  addUser
+  addUser,
+  getAllUsers
 }
 
 

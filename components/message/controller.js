@@ -1,57 +1,59 @@
-const store = require('./store')
+const store = require("./store");
 
 function addMessage(user, message) {
   return new Promise((resolve, reject) => {
     if (!user || !message) {
       console.error("User or message is missing");
       reject("Not enough data");
-      return false
+      return false;
     }
-    console.log(user,message);
+    console.log(user, message);
     const FullMessage = {
       user: user,
       message: message,
       date: new Date(),
     };
-    store.add(FullMessage)
+    store.add(FullMessage);
     resolve(FullMessage);
   });
-};
+}
 
 function getMessages(filterUser) {
   return new Promise((resolve, reject) => {
-    resolve(store.list(filterUser))
-  })
+    resolve(store.list(filterUser));
+  });
 }
 
 function updateMessage(id, message) {
   return new Promise(async (resolve, reject) => {
-    if(!id || !message) {
-      reject('Invalid Data')
+    if (!id || !message) {
+      reject("Invalid Data");
       return false;
     }
     const result = await store.updateText(id, message);
 
     resolve(result);
-  })
+  });
 }
 
 function deleteMessage(id) {
   return new Promise((resolve, reject) => {
-    if(!id) {
-      reject('Invalid Id')
-      return false
+    if (!id) {
+      reject("Invalid Id");
+      return false;
     }
 
-    store.remove(id)
-    .then(() => {
-      resolve()
-    })
-    .catch(error => {
-      reject(error)
-    })
-  })
+    store
+      .remove(id)
+      .then(() => {
+        resolve();
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
 }
+
 
 module.exports = {
   addMessage,
