@@ -2,13 +2,14 @@ const store = require("./store");
 
 function addMessage(user, message) {
   return new Promise((resolve, reject) => {
-    if (!user || !message) {
-      console.error("User or message is missing");
+    if (!chat || !user || !message) {
+      console.error("[messageController]: Chat, user or message is missing");
       reject("Not enough data");
       return false;
     }
     console.log(user, message);
     const FullMessage = {
+      chat: chat,
       user: user,
       message: message,
       date: new Date(),
