@@ -5,7 +5,7 @@ const controller = require("./controller");
 const response = require("../../network/response");
 
 const upload = multer({
-  dest: 'uploads/'
+  dest: 'uploads/files/'
 });
 
 router.get("/", (req, res) => {
@@ -22,7 +22,7 @@ router.get("/", (req, res) => {
 
 router.post("/", upload.single('file'), (req, res) => {
   controller
-    .addMessage(req.body.user, req.body.message)
+    .addMessage(req.body.user, req.body.message, req.file)
     .then((FullMessage) => {
       response.success(req, res, FullMessage, 201);
     })

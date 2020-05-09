@@ -1,18 +1,24 @@
 const store = require("./store");
 
-function addMessage(user, message) {
+function addMessage(user, message, file) {
   return new Promise((resolve, reject) => {
     if (!chat || !user || !message) {
       console.error("[messageController]: Chat, user or message is missing");
       reject("Not enough data");
       return false;
     }
-    console.log(user, message);
+
+    let fileUrl = '';
+    if(file){
+      fileUrl = 'http://localhost:3000/app/files/' + file.filename;
+    } 
+
     const FullMessage = {
       chat: chat,
       user: user,
       message: message,
       date: new Date(),
+      file: fileUrl
     };
     store.add(FullMessage);
     resolve(FullMessage);

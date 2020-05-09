@@ -1,17 +1,19 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
 const mySchema = new Schema({
   chat: {
-    type: Schema.ObjectId
+    type: Schema.ObjectId,
+    ref: "Chat",
   },
   user: {
     type: Schema.ObjectId,
-    required: 'user'
+    required: "user",
   },
   message: String,
   date: Date,
-})
+  file: String,
+});
 
-const model = mongoose.model('Message', mySchema);
+const model = mongoose.model("Message", mySchema);
 module.exports = model;
